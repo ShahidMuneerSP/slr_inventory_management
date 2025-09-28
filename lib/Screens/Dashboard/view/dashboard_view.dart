@@ -342,11 +342,7 @@ class PerfectSliverSection extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          // BoxShadow(
-          //   color: Colors.black.withOpacity(0.05),
-          //   blurRadius: 10,
-          //   offset: const Offset(0, 3),
-          // ),
+        
             BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.137),
         blurRadius: 10,
