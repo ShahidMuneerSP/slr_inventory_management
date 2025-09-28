@@ -155,6 +155,7 @@ class SalesCustomerPage extends StatelessWidget {
 
   Widget _buildSaleCard(Map<String, String> sale, context) {
     return CustomShadowContainer(
+       radius: 16,
       child: Row(
         children: [
           Expanded(

@@ -224,6 +224,7 @@ class CustomerSaleDetailedView extends StatelessWidget {
 
   Widget _buildProductCard(Map<String, dynamic> product, int index) {
     return CustomShadowContainer(
+       radius: 16,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
+import 'package:slr_inventory_management/Utils/common/customcard.dart';
 
 class ViewHeldBills extends StatelessWidget {
   const ViewHeldBills({super.key});
@@ -87,186 +88,190 @@ class StandardBillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 10),
-          // Header Section
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            decoration: const BoxDecoration(
-              color: Color(0xFFF8FAFC),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: CustomShadowContainer(
+        radius: 16,
+        // margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        // decoration: BoxDecoration(
+        //   color: Colors.white,
+        //   borderRadius: BorderRadius.circular(16),
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.grey.withOpacity(0.1),
+        //       spreadRadius: 1,
+        //       blurRadius: 8,
+        //       offset: const Offset(0, 2),
+        //     ),
+        //   ],
+        // ),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            // Header Section
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: const BoxDecoration(
+                color: Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
               ),
-            ),
-            child: Row(
-              children: [
-                // Name and Amount
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            name,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF1E293B),
-                              fontFamily: "Geist",
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF10B981).withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              "₹${billAmount.toStringAsFixed(2)}",
+              child: Row(
+                children: [
+                  // Name and Amount
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              name,
                               style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF10B981),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF1E293B),
                                 fontFamily: "Geist",
                               ),
+                            ),
+                            Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF10B981).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                "₹${billAmount.toStringAsFixed(2)}",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF10B981),
+                                  fontFamily: "Geist",
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 5),
+            // Phone Info
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [_buildInfoRow(label: "Phone", value: phone)],
+              ),
+            ),
+            SizedBox(height: 10),
+            // Details Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: size.width / 2.4,
+                    child: _buildInfoRow(label: "Created By", value: createdBy),
+                  ),
+                  SizedBox(
+                    width: size.width / 2.4,
+                    child: _buildInfoRow(
+                      label: "Created On",
+                      value: _formatDate(createdOn),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+      
+            // Date Info
+      
+            // Action Buttons
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                color: Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: onAddToBilling,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.mainBg,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add_shopping_cart_outlined, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            "ADD TO BILLING",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              fontFamily: "Geist",
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 5),
-          // Phone Info
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [_buildInfoRow(label: "Phone", value: phone)],
-            ),
-          ),
-          SizedBox(height: 10),
-          // Details Section
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: size.width / 2.4,
-                  child: _buildInfoRow(label: "Created By", value: createdBy),
-                ),
-                SizedBox(
-                  width: size.width / 2.4,
-                  child: _buildInfoRow(
-                    label: "Created On",
-                    value: _formatDate(createdOn),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: onDelete,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFFEF4444),
+                        side: const BorderSide(color: Color(0xFFEF4444)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.delete_outline, size: 20),
+                          SizedBox(width: 4),
+                          Text(
+                            "DELETE",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              fontFamily: "Geist",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          // Date Info
-
-          // Action Buttons
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
-              color: Color(0xFFF8FAFC),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: ElevatedButton(
-                    onPressed: onAddToBilling,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mainBg,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add_shopping_cart_outlined, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          "ADD TO BILLING",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            fontFamily: "Geist",
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: onDelete,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFFEF4444),
-                      side: const BorderSide(color: Color(0xFFEF4444)),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.delete_outline, size: 20),
-                        SizedBox(width: 4),
-                        Text(
-                          "DELETE",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            fontFamily: "Geist",
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

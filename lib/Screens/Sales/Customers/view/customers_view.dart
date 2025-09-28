@@ -86,7 +86,8 @@ class CustomersView extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: CustomShadowContainer(
-                      
+                      radius: 16,
+
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 10,
@@ -166,7 +167,7 @@ class CustomersView extends StatelessWidget {
                               ],
                             ),
                             SizedBox(height: 10),
-                    
+
                             Row(
                               children: [
                                 _buildDetailRow(

@@ -76,6 +76,7 @@ class _AddCustomerSalesViewState extends State<AddCustomerSalesView> {
               ),
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.grey.shade300, width: 1.5),
@@ -116,30 +117,6 @@ class _AddCustomerSalesViewState extends State<AddCustomerSalesView> {
               ),
             ),
 
-            // ConstrainedBox(
-            //   constraints: BoxConstraints(maxHeight: size.height / 3,minHeight: size.height / 3,),
-            //   child: ListView.separated(
-            //     shrinkWrap: true,
-            //     itemCount: products.length,
-            //     itemBuilder: (context, index) {
-            //       final product = products[index];
-            //       return ProductCard(
-            //         productName: product['name'],
-            //         productCode: product['code'],
-            //         quantity: product['quantity'],
-            //         unit: product['unit'],
-            //         mrp: product['mrp'],
-            //         price: product['price'],
-            //         onDelete: () => _deleteProduct(index),
-            //         onQuantityChanged: (newQuantity) =>
-            //             _updateQuantity(index, newQuantity),
-            //       );
-            //     },
-            //     separatorBuilder: (BuildContext context, int index) {
-            //       return SizedBox(height: 10);
-            //     },
-            //   ),
-            // ),
              SizedBox(height: 15),
             ProfessionalCheckoutScreen(),
             SizedBox(height: 30),
@@ -1184,6 +1161,7 @@ class _ProductCardState extends State<ProductCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CustomShadowContainer(
+         radius: 16,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(
