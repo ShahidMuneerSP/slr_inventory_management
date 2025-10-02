@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slr_inventory_management/Screens/Dashboard/controller/dashboardController.dart';
 import 'package:slr_inventory_management/Screens/Dashboard/widgets/adCarousel.dart';
+import 'package:slr_inventory_management/Screens/Dashboard/widgets/main_drawer.dart';
 import 'package:slr_inventory_management/Screens/Sales/view/sales_view.dart';
 
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
@@ -16,6 +18,8 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _DashboardScreenState extends State<DashboardScreen>
     with TickerProviderStateMixin {
   Dashboardcontroller dashboardcontroller = Get.put(Dashboardcontroller());
@@ -23,9 +27,14 @@ class _DashboardScreenState extends State<DashboardScreen>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
+  String? name;
+  String? userName;
+
   @override
   void initState() {
-    super.initState();
+    getData();
+
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       dashboardcontroller.scrollController;
     });
@@ -45,6 +54,16 @@ class _DashboardScreenState extends State<DashboardScreen>
         );
 
     _animationController.forward();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      name = pref.getString('name');
+      userName = pref.getString('username');
+    });
+   await dashboardcontroller.fetchData();
   }
 
   @override
@@ -56,6 +75,8 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
+      key: scaffoldKey,
       backgroundColor: AppColors.bgColor,
 
       body: Theme(
@@ -66,7 +87,8 @@ class _DashboardScreenState extends State<DashboardScreen>
           controller: dashboardcontroller.scrollController,
           physics: AlwaysScrollableScrollPhysics(),
           slivers: [
-            PerfectSliverAppBar(),
+            perfectSliverAppBar(),
+
             PerfectSliverSection(
               position: _slideAnimation,
               opacity: _fadeAnimation,
@@ -74,6 +96,115 @@ class _DashboardScreenState extends State<DashboardScreen>
           ],
         ),
       ),
+    );
+  }
+
+  SliverAppBar perfectSliverAppBar() {
+    return SliverAppBar(
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: InkWell(
+          onTap: () {
+            scaffoldKey.currentState!.openDrawer();
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white, width: 2.0),
+            ),
+            child: Icon(Icons.menu, color: Colors.white),
+          ),
+        ),
+      ),
+
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: AppColors.appbarBlueGradient,
+          ),
+        ),
+      ),
+
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Welcome back, ",
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.white70,
+              letterSpacing: 0.2,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            name.toString(),
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
+          ),
+        ],
+      ),
+
+      actions: [
+        Container(
+          margin: const EdgeInsets.only(right: 5, top: 12, bottom: 12),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+                width: 2,
+              ),
+            ),
+            child: CircleAvatar(
+              radius: 23,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 22,
+                backgroundImage: NetworkImage(
+                  "https://i.pravatar.cc/150?img=8",
+                ),
+                onBackgroundImageError: (exception, stackTrace) {},
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.1),
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+
+      // AppBar Properties
+      surfaceTintColor: AppColors.white,
+      automaticallyImplyLeading: false,
+      elevation: 0,
+      floating: true,
+      pinned: true,
+      backgroundColor: AppColors.mainBg,
+      expandedHeight: 80,
+      collapsedHeight: 80,
+      toolbarHeight: 80,
     );
   }
 }
@@ -332,8 +463,8 @@ class PerfectSliverSection extends StatelessWidget {
                           "Total\nPurchase",
                           "₹25,000",
                           Icons.trending_down_rounded,
-                          Colors.black, // Softer pink
-                          const Color(0xFFFDF2F8), // Very light pink
+                          Colors.black,
+                          const Color(0xFFFDF2F8),
                           size,
                         ),
                       ],
@@ -361,24 +492,7 @@ class PerfectSliverSection extends StatelessWidget {
     return CustomShadowContainer(
       width: size.width / 2.3,
       radius: 16,
-      // decoration: BoxDecoration(
-      //   color: Colors.white,
-      //   borderRadius: BorderRadius.circular(16),
-      //   boxShadow: [
-      //     BoxShadow(
-      //       color: Color.fromRGBO(0, 0, 0, 0.137),
-      //       blurRadius: 10,
-      //       spreadRadius: -5,
-      //       offset: Offset(0, 10),
-      //     ),
-      //     BoxShadow(
-      //       color: AppColors.commonBGColor,
-      //       blurRadius: 10,
-      //       spreadRadius: -5,
-      //       offset: Offset(0, 4),
-      //     ),
-      //   ],
-      // ),
+
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -442,14 +556,13 @@ class PerfectSliverSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
 
-                // Category Name
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontFamily: "Geist",
                     fontWeight: FontWeight.w600,
-                    fontSize: 15, // slightly smaller for 3-grid
+                    fontSize: 15,
                     color: Colors.black,
                   ),
 
@@ -460,165 +573,6 @@ class PerfectSliverSection extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class PerfectSliverAppBar extends StatelessWidget {
-  final String userName;
-  final String storeName;
-  final String avatarUrl;
-  final String logoAsset;
-  final VoidCallback? onProfileTap;
-  final VoidCallback? onLogoTap;
-
-  const PerfectSliverAppBar({
-    super.key,
-    this.userName = "Shahid",
-    this.storeName = "Shahid Store",
-    this.avatarUrl = "https://i.pravatar.cc/150?img=8",
-    this.logoAsset = 'assets/Images/slr_logo.png',
-    this.onProfileTap,
-    this.onLogoTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      // Leading - Profile Avatar
-      leading: Container(
-        margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-        child: GestureDetector(
-          onTap: onProfileTap,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-              border: Border.all(
-                color: Colors.white.withOpacity(0.2),
-                width: 2,
-              ),
-            ),
-            child: CircleAvatar(
-              radius: 32,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 22,
-                backgroundImage: NetworkImage(avatarUrl),
-                onBackgroundImageError: (exception, stackTrace) {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.1),
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-
-      // Flexible Space - Gradient Background
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: AppColors.appbarBlueGradient,
-          ),
-        ),
-      ),
-
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Welcome back, $userName",
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Colors.white70,
-              letterSpacing: 0.2,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            storeName,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-              letterSpacing: -0.5,
-            ),
-          ),
-        ],
-      ),
-
-      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 16, top: 12, bottom: 12),
-          child: GestureDetector(
-            onTap: onLogoTap,
-            child: Container(
-              width: 56,
-              height: 44,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.2),
-                  width: 1,
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  child: Image.asset(
-                    logoAsset,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(
-                        Icons.store,
-                        color: AppColors.appbarBlueGradient.first,
-                        size: 24,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-
-      // AppBar Properties
-      surfaceTintColor: AppColors.white,
-      automaticallyImplyLeading: false,
-      elevation: 0,
-      floating: true,
-      pinned: true,
-      backgroundColor: AppColors.mainBg,
-      expandedHeight: 80,
-      collapsedHeight: 80,
-      toolbarHeight: 80,
     );
   }
 }

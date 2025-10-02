@@ -12,7 +12,6 @@ import 'package:slr_inventory_management/Screens/Dashboard/view/dashboard_view.d
 import 'package:slr_inventory_management/Screens/Intro/view/intro_view.dart';
 import 'package:slr_inventory_management/Screens/Login/view/login_view.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -29,18 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _isLogged();
 
-   
     Timer(Duration(milliseconds: 500), () async {
       final status = await Permission.location.request();
       if (status.isGranted) {
         Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => (isLogged == true)
-                    ? IntroSplash()
-                    : token == ''
-                        ? LoginScreen()
-                        : DashboardScreen()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => (isLogged == true)
+                ? IntroSplash()
+                : token == ''
+                ? LoginScreen()
+                : DashboardScreen(),
+          ),
+        );
       } else {
         _requestLocationPermission(context);
       }
@@ -59,7 +59,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _requestLocationPermission(BuildContext context) async {
-   
     final userConsent = await showDialog<bool>(
       context: context,
       builder: (context) {
@@ -90,14 +89,14 @@ class _SplashScreenState extends State<SplashScreen> {
       final status = await Permission.location.request();
 
       if (status.isGranted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permission granted!')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Location permission granted!')));
         // Proceed with accessing location data
       } else if (status.isDenied || status.isPermanentlyDenied) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permission denied.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Location permission denied.')));
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -110,10 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          'assets/Images/slr_logo.png',
-          height: 150,
-        ),
+        child: Image.asset('assets/Images/slr_logo.png', height: 150),
       ),
     );
   }

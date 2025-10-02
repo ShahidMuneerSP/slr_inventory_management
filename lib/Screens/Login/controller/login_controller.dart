@@ -18,7 +18,7 @@ class LoginController extends GetxController {
   var isPending = false.obs;
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
-  // final form = Get.put(FormController());
+
   var isLoading = false.obs;
 
   String ipa = '';
@@ -71,6 +71,8 @@ class LoginController extends GetxController {
           pref.setString('token', data["SESSION"]["authToken"]);
           token = pref.getString('token')!;
           log('Token : $token');
+          pref.setString('name', data["SESSION"]["name"]);
+          pref.setString('username', data["SESSION"]["username"]);
 
           isPending.value = false;
           isLogged();
@@ -96,8 +98,6 @@ class LoginController extends GetxController {
         title: 'Login Failed',
         text: 'Something went a wrong please retry',
       );
-
-    
     }
   }
 
@@ -114,9 +114,7 @@ class LoginController extends GetxController {
         icon: Container(
           width: 50,
           height: 35,
-          decoration: BoxDecoration(
-      
-          ),
+          decoration: BoxDecoration(),
           child: Center(
             child: Icon(
               Icons.info,

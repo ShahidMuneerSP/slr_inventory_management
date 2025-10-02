@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Screens/Intro/controller/introController.dart';
 import 'package:slr_inventory_management/Screens/Intro/widgets/terms_widget.dart';
+import 'package:slr_inventory_management/Screens/Login/view/login_view.dart';
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
 
 class IntroSplash extends StatelessWidget {
@@ -146,10 +147,12 @@ class IntroSplash extends StatelessWidget {
                       onPressed: () {
                         control.skip.value = false;
                         termsandCondition(context);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => SignUp()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         "Skip",
