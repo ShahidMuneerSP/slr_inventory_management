@@ -1,24 +1,53 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:slr_inventory_management/Screens/Sales/Customers/view/customers_view.dart';
 import 'package:slr_inventory_management/Screens/Sales/Sales%20Customer/widgets/Add%20Customer%20Sale/view/add_customer_sale_view.dart';
 import 'package:slr_inventory_management/Screens/Sales/Sales%20Customer/widgets/customer_sale_detailed_view.dart';
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
 import 'package:slr_inventory_management/Utils/common/customcard.dart';
 
-class SalesCustomerPage extends StatelessWidget {
+class SalesCustomerPage extends StatefulWidget {
   const SalesCustomerPage({super.key});
+
+  @override
+  State<SalesCustomerPage> createState() => _SalesCustomerPageState();
+}
+
+class _SalesCustomerPageState extends State<SalesCustomerPage> {
+  var hintex = ['Search Here', 'Customer Name', "Invoice Number"];
+
+  var ind = 0;
+
+  late Timer timer;
+
+  Future hintTime() async {
+    timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      setState(() {
+        ind = (ind + 1) % hintex.length;
+        //print(hintex[ind]);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    hintTime();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: Column(
         children: [
-          _buildSearchSection(),
+          SizedBox(height: 10),
           Expanded(child: _buildSalesList()),
         ],
       ),
@@ -32,7 +61,7 @@ class SalesCustomerPage extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
       surfaceTintColor: Colors.transparent,
       flexibleSpace: Container(
@@ -41,9 +70,7 @@ class SalesCustomerPage extends StatelessWidget {
         ),
       ),
       backgroundColor: AppColors.commonDarkestBlue,
-
       iconTheme: IconThemeData(color: AppColors.white),
-
       title: Text(
         "Customer Sales",
         style: TextStyle(
@@ -81,7 +108,6 @@ class SalesCustomerPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               elevation: 0,
             ),
-
             label: const Text(
               "Customers",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
@@ -89,8 +115,101 @@ class SalesCustomerPage extends StatelessWidget {
           ),
         ),
       ],
+
+      // 👇 Add bottom here
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+          child: CustomShadowContainer(
+            width: MediaQuery.of(context).size.width,
+            height: 45,
+            radius: 10,
+            child: TextField(
+              readOnly: false,
+              onTap: () {},
+              style: const TextStyle(
+                fontSize: 15,
+                fontFamily: "Geist",
+                fontWeight: FontWeight.w500,
+              ),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintex[ind],
+                hintStyle: const TextStyle(
+                  fontFamily: "Geist",
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                prefixIcon: const Icon(BoxIcons.bx_search, size: 25),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
+
+  // PreferredSizeWidget _buildAppBar() {
+  //   return AppBar(
+  //     surfaceTintColor: Colors.transparent,
+  //     flexibleSpace: Container(
+  //       decoration: BoxDecoration(
+  //         gradient: LinearGradient(colors: AppColors.appbarBlueGradient),
+  //       ),
+  //     ),
+  //     backgroundColor: AppColors.commonDarkestBlue,
+
+  //     iconTheme: IconThemeData(color: AppColors.white),
+
+  //     title: Text(
+  //       "Customer Sales",
+  //       style: TextStyle(
+  //         fontWeight: FontWeight.w600,
+  //         fontSize: 18,
+  //         color: AppColors.white,
+  //       ),
+  //     ),
+  //     leading: InkWell(
+  //       onTap: () => Get.back(),
+  //       child: Container(
+  //         margin: EdgeInsets.all(10),
+  //         decoration: BoxDecoration(
+  //           color: AppColors.white.withOpacity(0.2),
+  //           shape: BoxShape.circle,
+  //         ),
+  //         child: Icon(Icons.arrow_back, color: AppColors.white, size: 20),
+  //       ),
+  //     ),
+  //     elevation: 0.5,
+  //     shadowColor: Colors.black.withOpacity(0.1),
+  //     actions: [
+  //       Padding(
+  //         padding: const EdgeInsets.only(top: 8, bottom: 8, right: 10),
+  //         child: ElevatedButton.icon(
+  //           onPressed: () {
+  //             Get.to(CustomersView());
+  //           },
+  //           style: ElevatedButton.styleFrom(
+  //             backgroundColor: AppColors.white,
+  //             foregroundColor: Colors.black,
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(12),
+  //             ),
+  //             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //             elevation: 0,
+  //           ),
+
+  //           label: const Text(
+  //             "Customers",
+  //             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildSearchSection() {
     return Container(
@@ -155,7 +274,7 @@ class SalesCustomerPage extends StatelessWidget {
 
   Widget _buildSaleCard(Map<String, String> sale, context) {
     return CustomShadowContainer(
-       radius: 16,
+      radius: 16,
       child: Row(
         children: [
           Expanded(

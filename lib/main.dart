@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:slr_inventory_management/Screens/Dashboard/view/dashboard_view.dart';
+import 'package:slr_inventory_management/Screens/Splash/view/splash.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+   await dotenv.load(fileName: '.env');
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
   
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: 'Geist',
       ),
-      home: const DashboardScreen(),
+      home: SplashScreen(),
     );
   }
 }

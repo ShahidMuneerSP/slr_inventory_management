@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Screens/Sales/Customers/view/customers_view.dart';
@@ -5,6 +7,7 @@ import 'package:slr_inventory_management/Screens/Sales/Sales%20Checking/view/sal
 import 'package:slr_inventory_management/Screens/Sales/Sales%20Customer/view/sales_customer_view.dart';
 import 'package:slr_inventory_management/Screens/Sales/View%20Held%20Bills/view/view_held_bills.dart';
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
+import 'package:slr_inventory_management/Utils/common/customcard.dart';
 
 class SalesView extends StatelessWidget {
   const SalesView({super.key});
@@ -150,131 +153,89 @@ class SalesView extends StatelessWidget {
     required Gradient gradient,
     required VoidCallback onTap,
   }) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue.shade50,
-              Colors.blue.shade100.withOpacity(0.5),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(20),
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBg.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(icon, color: AppColors.mainBg, size: 24),
+    return CustomShadowContainer(
+      radius: 15,
+
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 215, 229, 249),
+                    shape: BoxShape.circle,
                   ),
-                  SizedBox(height: 12),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Icon(icon, color: AppColors.mainBg, size: 24),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: "Geist",
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.8),
-                      fontSize: 12,
-                    ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontFamily: "Geist",
+                    color: Colors.black.withOpacity(0.8),
+                    fontSize: 13,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
       ),
     );
   }
-Widget _buildStatCard(String title, String value, IconData icon) {
-  return Expanded(
-    child: Card(
-      elevation: 0, // Remove shadow
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          color: Colors.grey[300]!, // Add border
-          width: 1.5,
+
+  Widget _buildStatCard(String title, String value, IconData icon) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: AppColors.mainBg, width: 1.5),
+          borderRadius: BorderRadius.circular(15),
+        ),
+
+        child: Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: Colors.black87,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-  // Widget _buildStatCard(String title, String value, IconData icon) {
-  //   return Expanded(
-  //     child: Card(
-  //       elevation: 2,
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  //       child: Padding(
-  //         padding: EdgeInsets.all(15),
-  //         child: Column(
-  //           children: [
-  //             Text(
-  //               title,
-  //               style: TextStyle(
-  //                 fontSize: 13,
-  //                 color: Colors.grey[600],
-  //                 fontWeight: FontWeight.w500,
-  //               ),
-  //             ),
-  //             Text(
-  //               value,
-  //               style: TextStyle(
-  //                 fontSize: 18,
-  //                 fontWeight: FontWeight.w700,
-  //                 color: Colors.black87,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+    );
+  }
 }
