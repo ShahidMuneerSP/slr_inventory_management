@@ -1,6 +1,7 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, strict_top_level_inference
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -211,49 +212,49 @@ class _SalesCustomerPageState extends State<SalesCustomerPage> {
   //   );
   // }
 
-  Widget _buildSearchSection() {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Search Customer Name or Invoice No",
-              hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
-              prefixIcon: Icon(
-                Icons.search_rounded,
-                color: Colors.grey.shade400,
-                size: 22,
-              ),
-              filled: true,
-              fillColor: const Color(0xFFF8F9FA),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade200),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(
-                  color: Color(0xFF6366F1),
-                  width: 2,
-                ),
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 16,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildSearchSection() {
+  //   return Container(
+  //     color: Colors.white,
+  //     padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         TextField(
+  //           decoration: InputDecoration(
+  //             hintText: "Search Customer Name or Invoice No",
+  //             hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+  //             prefixIcon: Icon(
+  //               Icons.search_rounded,
+  //               color: Colors.grey.shade400,
+  //               size: 22,
+  //             ),
+  //             filled: true,
+  //             fillColor: const Color(0xFFF8F9FA),
+  //             border: OutlineInputBorder(
+  //               borderRadius: BorderRadius.circular(12),
+  //               borderSide: BorderSide(color: Colors.grey.shade200),
+  //             ),
+  //             enabledBorder: OutlineInputBorder(
+  //               borderRadius: BorderRadius.circular(12),
+  //               borderSide: BorderSide(color: Colors.grey.shade200),
+  //             ),
+  //             focusedBorder: OutlineInputBorder(
+  //               borderRadius: BorderRadius.circular(12),
+  //               borderSide: const BorderSide(
+  //                 color: Color(0xFF6366F1),
+  //                 width: 2,
+  //               ),
+  //             ),
+  //             contentPadding: const EdgeInsets.symmetric(
+  //               vertical: 16,
+  //               horizontal: 16,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildSalesList() {
     return ListView.separated(
@@ -468,7 +469,7 @@ class _SalesCustomerPageState extends State<SalesCustomerPage> {
   // Helper methods (add these to your widget class)
   void _handleEdit() {
     // Your edit logic here
-    print('Edit action triggered');
+    log('Edit action triggered');
   }
 
   void _showDeleteConfirmation(context) {
@@ -535,7 +536,7 @@ class _SalesCustomerPageState extends State<SalesCustomerPage> {
 
   void _handleDelete() {
     // Your delete logic here
-    print('Item deleted');
+    log('Item deleted');
   }
 }
 

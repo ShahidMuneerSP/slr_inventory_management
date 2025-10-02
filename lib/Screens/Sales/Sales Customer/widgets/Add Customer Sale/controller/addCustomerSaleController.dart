@@ -1,5 +1,9 @@
 
 
+// ignore_for_file: file_names
+
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Screens/Sales/Sales%20Customer/widgets/Add%20Customer%20Sale/view/add_customer_sale_view.dart';
@@ -137,7 +141,7 @@ class Addcustomersalecontroller extends GetxController {
 
   void performSearch(String searchTerm) {
     // Implement your actual search logic here
-    print('Performing search for: $searchTerm');
+    log('Performing search for: $searchTerm');
 
     // Your existing search implementation
     // ...

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +34,7 @@ class IntroScreenDefaultState extends State<IntroScreenDefault> {
         title: "Shop Easy,Live Better",
         description:
             "Your gatway to effortless shopping and richer life,Explore world of convenience,quality and saving your fingertips",
-        pathImage: 'assets/images/gif1.webp',
+        pathImage: 'assets/Images/gif1.webp',
         backgroundColor: Colors.white,
       ),
     );

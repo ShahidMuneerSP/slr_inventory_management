@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, deprecated_member_use, unnecessary_null_comparison
+// ignore_for_file: file_names, deprecated_member_use, unnecessary_null_comparison, strict_top_level_inference
 
 import 'dart:developer';
 import 'dart:math' hide log;
@@ -88,8 +88,8 @@ class _ProductserachbarcodescannerState extends State<Productserachbarcodescanne
                 barCode = barcode;
               });
 
-              print(
-                'ON Detected : ' + (barcode.barcodes.first.rawValue.toString()),
+              log(
+                'ON Detected : ${barcode.barcodes.first.rawValue}',
               );
               controller.stop();
 

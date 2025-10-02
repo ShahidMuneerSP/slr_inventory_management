@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, file_names
+
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -7,7 +9,7 @@ import 'package:flutter/material.dart';
 class AvatarGlow extends StatefulWidget {
   /// Creates an [AvatarGlow] widget.
   const AvatarGlow({
-    Key? key,
+    super.key,
     required this.child,
     this.glowCount = 2,
     this.glowColor = Colors.white,
@@ -22,8 +24,7 @@ class AvatarGlow extends StatefulWidget {
   })  : assert(
           glowShape != BoxShape.circle || glowBorderRadius == null,
           'Cannot specify a border radius if the shape is a circle.',
-        ),
-        super(key: key);
+        );
 
   /// The child widget to display inside the glowing effect.
   final Widget child;

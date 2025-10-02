@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Screens/Sales/Customers/model/customerListModel.dart';

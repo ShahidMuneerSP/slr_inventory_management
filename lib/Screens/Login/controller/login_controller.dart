@@ -1,4 +1,4 @@
-// ignore_for_file: strict_top_level_inference
+// ignore_for_file: strict_top_level_inference, use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:developer';
@@ -31,7 +31,7 @@ class LoginController extends GetxController {
   isLogged() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool('islogged', false);
-    print(pref.get('islogged'));
+    log(pref.get('islogged').toString());
   }
 
   loginPost({

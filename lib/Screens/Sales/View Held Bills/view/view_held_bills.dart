@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
@@ -337,11 +339,11 @@ class BillListView extends StatelessWidget {
             createdOn: bill.createdOn,
             onAddToBilling: () {
               // Handle add to billing
-              print("Add to billing: ${bill.name}");
+              log("Add to billing: ${bill.name}");
             },
             onDelete: () {
               // Handle delete
-              print("Delete: ${bill.name}");
+              log("Delete: ${bill.name}");
             },
           );
         },

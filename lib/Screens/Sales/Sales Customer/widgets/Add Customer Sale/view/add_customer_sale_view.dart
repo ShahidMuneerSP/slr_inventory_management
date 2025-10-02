@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, use_super_parameters, strict_top_level_inference, must_be_immutable
+// ignore_for_file: deprecated_member_use, use_super_parameters, strict_top_level_inference, must_be_immutable, annotate_overrides
 
 import 'dart:developer';
 
@@ -2598,9 +2598,9 @@ class AddCustomorSaleVoiceSearch extends StatelessWidget {
                     onPressed: () {
                       speechToText.listen(
                         onResult: (result) {
-                          print(result.recognizedWords);
-                          print(result.confidence);
-                          print(result.runtimeType);
+                          log(result.recognizedWords);
+                          log(result.confidence.toString());
+                          log(result.runtimeType.toString());
                           controllers.voiceText.value = result.recognizedWords;
                           if (controllers.voiceText.value != '') {
                             controllers.searchProductController.text =
