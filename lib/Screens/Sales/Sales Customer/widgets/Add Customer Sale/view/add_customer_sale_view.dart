@@ -1113,297 +1113,6 @@ class _SalesCustomerTextfiledState extends State<SalesCustomerTextfiled> {
   }
 }
 
-// class ProductCard extends StatefulWidget {
-//   final String productName;
-//   final String productCode;
-//   final int quantity;
-//   final String unit;
-//   final double mrp;
-//   final double price;
-//   final VoidCallback? onDelete;
-//   final Function(int)? onQuantityChanged;
-//   final double netAmount;
-
-//   const ProductCard({
-//     Key? key,
-//     required this.productName,
-//     required this.productCode,
-//     required this.quantity,
-//     required this.unit,
-//     required this.mrp,
-//     required this.price,
-//     this.onDelete,
-//     this.onQuantityChanged,
-//     required this.netAmount,
-//   }) : super(key: key);
-
-//   @override
-//   State<ProductCard> createState() => _ProductCardState();
-// }
-
-// class _ProductCardState extends State<ProductCard> {
-//   final Addcustomersalecontroller addcustomersalecontroller = Get.find();
-//   late int _quantity;
-//   late double netAmount;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _quantity = widget.quantity;
-//     netAmount = widget.netAmount;
-//   }
-
-//   void _incrementQuantity() {
-//     setState(() {
-//       _quantity++;
-//       netAmount = widget.price * _quantity;
-//     });
-//     widget.onQuantityChanged?.call(_quantity);
-
-//   }
-
-//   void _decrementQuantity() {
-//     if (_quantity > 1) {
-//       setState(() {
-//         _quantity--;
-//         netAmount = widget.price * _quantity;
-//       });
-//       widget.onQuantityChanged?.call(_quantity);
-//       // Call total calculation after quantity change
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     final colorScheme = theme.colorScheme;
-
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 10),
-//       child: Container(
-//         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-//         padding: const EdgeInsets.all(12),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(12),
-//           color: Colors.white,
-//           boxShadow: [
-//             BoxShadow(
-//               color: Colors.black.withOpacity(0.1),
-//               blurRadius: 6,
-//               offset: const Offset(0, 2),
-//             ),
-//           ],
-//           border: Border.all(color: Colors.grey.shade200, width: 1),
-//         ),
-//         child: Column(
-//           children: [
-//             Row(
-//               children: [
-//                 Container(
-//                   width: 40,
-//                   height: 40,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(8),
-//                     color: Colors.white,
-//                     image: const DecorationImage(
-//                       image: AssetImage("assets/Images/download.jpeg"),
-//                       fit: BoxFit.cover,
-//                     ),
-//                   ),
-//                 ),
-//                 const SizedBox(width: 12),
-//                 Expanded(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         widget.productName,
-//                         style: theme.textTheme.titleSmall?.copyWith(
-//                           fontWeight: FontWeight.w600,
-//                         ),
-//                         maxLines: 1,
-//                         overflow: TextOverflow.ellipsis,
-//                       ),
-//                       const SizedBox(height: 2),
-//                       Text(
-//                         widget.productCode,
-//                         style: theme.textTheme.bodySmall?.copyWith(
-//                           color: colorScheme.onSurface.withOpacity(0.6),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//                 Container(
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.circle,
-//                     color: colorScheme.error.withOpacity(0.1),
-//                   ),
-//                   child: IconButton(
-//                     onPressed: () {
-//                       widget.onDelete?.call();
-//                     },
-//                     icon: Icon(Icons.delete_outline, size: 18),
-//                     iconSize: 18,
-//                     constraints: const BoxConstraints(
-//                       minWidth: 32,
-//                       minHeight: 32,
-//                     ),
-//                     style: IconButton.styleFrom(
-//                       foregroundColor: colorScheme.error,
-//                       padding: EdgeInsets.zero,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-
-//             const SizedBox(height: 12),
-
-//             Row(
-//               children: [
-//                 // Price Information
-//                 Expanded(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Row(
-//                         children: [
-//                           Text(
-//                             '₹${widget.price.toStringAsFixed(0)}',
-//                             style: theme.textTheme.bodyMedium?.copyWith(
-//                               fontWeight: FontWeight.w700,
-//                               color: Colors.green.shade700,
-//                             ),
-//                           ),
-//                           if (widget.mrp != widget.price) ...[
-//                             const SizedBox(width: 8),
-//                             Text(
-//                               '₹${widget.mrp.toStringAsFixed(0)}',
-//                               style: theme.textTheme.bodySmall?.copyWith(
-//                                 color: colorScheme.onSurface.withOpacity(0.5),
-//                                 decoration: TextDecoration.lineThrough,
-//                               ),
-//                             ),
-//                           ],
-//                         ],
-//                       ),
-//                       const SizedBox(height: 6),
-//                       Container(
-//                         padding: const EdgeInsets.symmetric(
-//                           horizontal: 8,
-//                           vertical: 4,
-//                         ),
-//                         decoration: BoxDecoration(
-//                           color: Colors.blue.shade50,
-//                           borderRadius: BorderRadius.circular(6),
-//                           border: Border.all(
-//                             color: Colors.blue.shade100,
-//                             width: 1,
-//                           ),
-//                         ),
-//                         child: Text(
-//                           widget.unit,
-//                           style: theme.textTheme.bodySmall?.copyWith(
-//                             fontSize: 10,
-//                             fontWeight: FontWeight.w500,
-//                             color: Colors.blue.shade800,
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-
-//                 // Quantity controls
-//                 Container(
-//                   decoration: BoxDecoration(
-//                     color: Colors.blue.shade50,
-//                     borderRadius: BorderRadius.circular(10),
-//                     border: Border.all(color: Colors.blue.shade100, width: 1.5),
-//                   ),
-//                   child: Row(
-//                     mainAxisSize: MainAxisSize.min,
-//                     children: [
-//                       IconButton(
-//                         onPressed: _quantity > 1 ? _decrementQuantity : null,
-//                         icon: Icon(
-//                           Icons.remove,
-//                           size: 16,
-//                           color: _quantity > 1
-//                               ? Colors.blue.shade700
-//                               : Colors.grey,
-//                         ),
-//                         iconSize: 16,
-//                         constraints: const BoxConstraints(
-//                           minWidth: 32,
-//                           minHeight: 32,
-//                         ),
-//                         style: IconButton.styleFrom(padding: EdgeInsets.zero),
-//                       ),
-
-//                       Container(
-//                         padding: const EdgeInsets.symmetric(horizontal: 8),
-//                         constraints: const BoxConstraints(minWidth: 24),
-//                         child: Text(
-//                           '$_quantity',
-//                           textAlign: TextAlign.center,
-//                           style: theme.textTheme.bodyMedium?.copyWith(
-//                             fontWeight: FontWeight.w700,
-//                             color: Colors.blue.shade900,
-//                           ),
-//                         ),
-//                       ),
-
-//                       IconButton(
-//                         onPressed: _incrementQuantity,
-//                         icon: Icon(
-//                           Icons.add,
-//                           size: 16,
-//                           color: Colors.blue.shade700,
-//                         ),
-//                         iconSize: 16,
-//                         constraints: const BoxConstraints(
-//                           minWidth: 32,
-//                           minHeight: 32,
-//                         ),
-//                         style: IconButton.styleFrom(padding: EdgeInsets.zero),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-
-//                 const SizedBox(width: 12),
-
-//                 // Net amount
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.end,
-//                   children: [
-//                     Text(
-//                       'Total',
-//                       style: theme.textTheme.bodySmall?.copyWith(
-//                         color: colorScheme.onSurface.withOpacity(0.6),
-//                       ),
-//                     ),
-//                     Text(
-//                       '₹${netAmount.toStringAsFixed(0)}',
-//                       style: const TextStyle(
-//                         fontSize: 16,
-//                         fontWeight: FontWeight.bold,
-//                         color: Colors.black,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class ProductCard extends StatefulWidget {
   final String productName;
   final String productCode;
@@ -1472,38 +1181,6 @@ class _ProductCardState extends State<ProductCard> {
       widget.onQuantityChanged?.call(_quantity);
     }
   }
-
-  // ... rest of your build method
-
-  // final Addcustomersalecontroller addcustomersalecontroller = Get.find();
-  // late int _quantity;
-  // late double netAmount;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _quantity = widget.quantity;
-  //   netAmount = widget.netAmount;
-
-  // }
-
-  // void _incrementQuantity() {
-  //   setState(() {
-  //     _quantity++;
-  //     netAmount = widget.price * _quantity;
-  //   });
-  //   widget.onQuantityChanged?.call(_quantity);
-  // }
-
-  // void _decrementQuantity() {
-  //   if (_quantity > 1) {
-  //     setState(() {
-  //       _quantity--;
-  //       netAmount = widget.price * _quantity;
-  //     });
-  //     widget.onQuantityChanged?.call(_quantity);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -1748,11 +1425,8 @@ class _ProfessionalCheckoutScreenState extends State<ProfessionalCheckoutScreen>
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            Obx(
-              () => addcustomersalecontroller.addedProductList.isNotEmpty
-                  ? _buildOrderSummaryCard()
-                  : SizedBox(),
-            ),
+            _buildOrderSummaryCard(),
+
             const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1770,59 +1444,34 @@ class _ProfessionalCheckoutScreenState extends State<ProfessionalCheckoutScreen>
                     },
                   ),
                 ),
-                Obx(
-                  () => addcustomersalecontroller.addedProductList.isNotEmpty
-                      ? SizedBox(
-                          width: size.width / 2.6,
-                          child: _buildActionButton(
-                            "Hold Bill",
-                            Icons.post_add,
-                            Colors.white,
-                            AppColors.mainBg,
-                            () {
-                              showToast(
-                                context,
-                                "Success",
-                                "Bill Hold Successfully",
-                                ToastificationType.success,
-                              );
-                            },
-                          ),
-                        )
-                      : SizedBox(),
+                SizedBox(
+                  width: size.width / 2.6,
+                  child: _buildActionButton(
+                    "Hold Bill",
+                    Icons.post_add,
+                    Colors.white,
+                    AppColors.mainBg,
+                    () {
+                      showToast(
+                        context,
+                        "Success",
+                        "Bill Hold Successfully",
+                        ToastificationType.success,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
-            Obx(
-              () => addcustomersalecontroller.addedProductList.isNotEmpty
-                  ? const SizedBox(height: 15)
-                  : SizedBox(),
-            ),
-            Obx(
-              () => addcustomersalecontroller.addedProductList.isNotEmpty
-                  ? _buildPaymentMethodCard()
-                  : SizedBox(),
-            ),
-            Obx(
-              () => addcustomersalecontroller.isShowSalesCustomer.value == true
-                  ? const SizedBox(height: 15)
-                  : SizedBox(),
-            ),
-            Obx(
-              () => addcustomersalecontroller.isShowSalesCustomer.value == true
-                  ? _buildCustomerInfoCard(addcustomersalecontroller)
-                  : SizedBox(),
-            ),
-            Obx(
-              () => addcustomersalecontroller.addedProductList.isNotEmpty
-                  ? const SizedBox(height: 20)
-                  : SizedBox(),
-            ),
-            Obx(
-              () => addcustomersalecontroller.addedProductList.isNotEmpty
-                  ? _buildActionButtons()
-                  : SizedBox(),
-            ),
+            const SizedBox(height: 15),
+            _buildPaymentMethodCard(),
+
+            const SizedBox(height: 15),
+            _buildCustomerInfoCard(addcustomersalecontroller),
+
+            const SizedBox(height: 20),
+
+            _buildActionButtons(),
           ],
         ),
       ),
@@ -1990,7 +1639,12 @@ class _ProfessionalCheckoutScreenState extends State<ProfessionalCheckoutScreen>
 
                               Obx(
                                 () => Text(
-                                  '₹${addcustomersalecontroller.getTotalPayableAmount().toStringAsFixed(2)}',
+                                  addcustomersalecontroller
+                                                  .getTotalPayableAmount() %
+                                              2 ==
+                                          0
+                                      ? '₹${addcustomersalecontroller.getTotalPayableAmount().toInt().toString()}'
+                                      : '₹${addcustomersalecontroller.getTotalPayableAmount().toStringAsFixed(2)}',
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -2253,7 +1907,9 @@ class _ProfessionalCheckoutScreenState extends State<ProfessionalCheckoutScreen>
               () => addCustomerSaleController.isShowCustimorInfo.value == true
                   ? _buildInfoRow(
                       'Name',
-                      addcustomersalecontroller.customerName.value,
+                      addcustomersalecontroller.customerName.value.isNotEmpty
+                          ? addcustomersalecontroller.customerName.value
+                          : "--",
                       Icons.person_outline,
                     )
                   : SizedBox(),
@@ -2262,27 +1918,21 @@ class _ProfessionalCheckoutScreenState extends State<ProfessionalCheckoutScreen>
               () => addCustomerSaleController.isShowCustimorInfo.value == true
                   ? _buildInfoRow(
                       'Phone',
-                      addcustomersalecontroller.customerPhone.value,
+                      addcustomersalecontroller.customerPhone.value.isNotEmpty
+                          ? addcustomersalecontroller.customerPhone.value
+                          : "--",
                       Icons.phone_outlined,
                     )
                   : SizedBox(),
             ),
             Obx(
               () => addCustomerSaleController.isShowCustimorInfo.value == true
-                  ? _buildInfoRow(
-                      'Email',
-                      customerData['email'],
-                      Icons.email_outlined,
-                    )
+                  ? _buildInfoRow('Email', "--", Icons.email_outlined)
                   : SizedBox(),
             ),
             Obx(
               () => addCustomerSaleController.isShowCustimorInfo.value == true
-                  ? _buildInfoRow(
-                      'Pincode',
-                      customerData['pincode'],
-                      Icons.location_on_outlined,
-                    )
+                  ? _buildInfoRow('Pincode', "--", Icons.location_on_outlined)
                   : SizedBox(),
             ),
           ],

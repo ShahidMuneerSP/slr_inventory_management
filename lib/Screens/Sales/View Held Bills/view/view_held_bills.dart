@@ -146,12 +146,12 @@ class StandardBillCard extends StatelessWidget {
                               ),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF10B981).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
                                 "₹${billAmount.toStringAsFixed(2)}",
                                 style: const TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                   color: Color(0xFF10B981),
                                   fontFamily: "Geist",
@@ -160,7 +160,6 @@ class StandardBillCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
                       ],
                     ),
                   ),
@@ -195,12 +194,12 @@ class StandardBillCard extends StatelessWidget {
                 ],
               ),
             ),
-      
+
             // Date Info
-      
+
             // Action Buttons
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(15),
               decoration: const BoxDecoration(
                 color: Color(0xFFF8FAFC),
                 borderRadius: BorderRadius.only(
@@ -245,7 +244,8 @@ class StandardBillCard extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: onDelete,
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: const Color(0xFFEF4444),
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
                         side: const BorderSide(color: Color(0xFFEF4444)),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(

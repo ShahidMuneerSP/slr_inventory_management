@@ -34,7 +34,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   void initState() {
     getData();
 
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       dashboardcontroller.scrollController;
     });
@@ -63,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen>
       name = pref.getString('name');
       userName = pref.getString('username');
     });
-   await dashboardcontroller.fetchData();
+    await dashboardcontroller.fetchData();
   }
 
   @override
@@ -337,7 +336,7 @@ class PerfectSliverSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomShadowContainer(
-                      radius: 10,
+                      radius: 15,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -409,7 +408,7 @@ class PerfectSliverSection extends StatelessWidget {
                       children: [
                         _buildStatCard(
                           "Today's\nSales",
-                          "₹1,200",
+                          "₹0",
                           Icons.attach_money_rounded,
                           Colors.black, // Softer green
                           const Color(0xFFF0FDF4), // Very light green
@@ -417,7 +416,7 @@ class PerfectSliverSection extends StatelessWidget {
                         ),
                         _buildStatCard(
                           "Today's\nPurchases",
-                          "₹1,200",
+                          "₹0",
                           Icons.shopping_bag_rounded,
                           Colors.black, // Softer red
                           const Color(0xFFFEF2F2), // Very light red
@@ -431,7 +430,7 @@ class PerfectSliverSection extends StatelessWidget {
                       children: [
                         _buildStatCard(
                           "Low Stock\nItems",
-                          "5",
+                          "0",
                           Icons.warning_rounded,
                           Colors.black, // Warm orange
                           const Color(0xFFFFFBEB), // Very light amber
@@ -439,7 +438,7 @@ class PerfectSliverSection extends StatelessWidget {
                         ),
                         _buildStatCard(
                           "Total\nInventory",
-                          "₹25,000",
+                          "₹0",
                           Icons.inventory_rounded,
                           Colors.black, // Softer blue
                           const Color(0xFFEFF6FF), // Very light blue
@@ -453,7 +452,7 @@ class PerfectSliverSection extends StatelessWidget {
                       children: [
                         _buildStatCard(
                           "Total\nSales",
-                          "₹25,000",
+                          "₹0",
                           Icons.trending_up_rounded,
                           Colors.black, // Softer purple
                           const Color(0xFFF5F3FF), // Very light purple
@@ -461,7 +460,7 @@ class PerfectSliverSection extends StatelessWidget {
                         ),
                         _buildStatCard(
                           "Total\nPurchase",
-                          "₹25,000",
+                          "₹0",
                           Icons.trending_down_rounded,
                           Colors.black,
                           const Color(0xFFFDF2F8),

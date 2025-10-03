@@ -136,13 +136,13 @@ class CustomersView extends StatelessWidget {
                                     );
                                   },
                                   child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromARGB(255, 192, 219, 236),
+                                    decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 219, 231, 250),
                                       shape: BoxShape.circle,
                                     ),
                                     margin: const EdgeInsets.all(8),
                                     padding: const EdgeInsets.all(5),
-                                    child: const Center(
+                                    child:  Center(
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -151,12 +151,7 @@ class CustomersView extends StatelessWidget {
                                         children: [
                                           Icon(
                                             Icons.edit_square,
-                                            color: Color.fromARGB(
-                                              255,
-                                              22,
-                                              107,
-                                              160,
-                                            ),
+                                            color:AppColors.mainBg,
                                             size: 18,
                                           ),
                                         ],

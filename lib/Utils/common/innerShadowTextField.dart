@@ -93,7 +93,8 @@ class InnerShadowTextField extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: Color(0xff8B9EB0)),
               filled: true,
-              fillColor: const Color(0xffe7eef3),
+              fillColor: Colors.white,
+             // fillColor: const Color(0xffe7eef3),
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               border: OutlineInputBorder(

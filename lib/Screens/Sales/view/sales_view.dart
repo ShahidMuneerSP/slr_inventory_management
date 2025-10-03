@@ -51,32 +51,33 @@ class SalesView extends StatelessWidget {
 
             elevation: 0,
           ),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            sliver: SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      _buildStatCard(
-                        "Today's Sales",
-                        "₹1,12,450",
-                        Icons.trending_up_rounded,
-                      ),
-                      SizedBox(width: 12),
-                      _buildStatCard(
-                        "Pending Bills",
-                        "12",
-                        Icons.pending_actions_rounded,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // SliverPadding(
+          //   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          //   sliver: SliverToBoxAdapter(
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Row(
+          //           children: [
+          //             _buildStatCard(
+          //               "Today's Sales",
+          //               "₹1,12,450",
+          //               Icons.trending_up_rounded,
+          //             ),
+          //             SizedBox(width: 12),
+          //             _buildStatCard(
+          //               "Pending Bills",
+          //               "12",
+          //               Icons.pending_actions_rounded,
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           // Sales Features Grid
+           SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 15),
             sliver: SliverGrid(
@@ -202,40 +203,40 @@ class SalesView extends StatelessWidget {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: AppColors.mainBg, width: 1.5),
-          borderRadius: BorderRadius.circular(15),
-        ),
+  // Widget _buildStatCard(String title, String value, IconData icon) {
+  //   return Expanded(
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         border: Border.all(color: AppColors.mainBg, width: 1.5),
+  //         borderRadius: BorderRadius.circular(15),
+  //       ),
 
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  //       child: Padding(
+  //         padding: EdgeInsets.all(15),
+  //         child: Column(
+  //           children: [
+  //             Text(
+  //               title,
+  //               style: TextStyle(
+  //                 fontSize: 14,
+  //                 color: Colors.grey[600],
+  //                 fontWeight: FontWeight.w500,
+  //               ),
+  //             ),
+  //             SizedBox(height: 5),
+  //             Text(
+  //               value,
+  //               style: TextStyle(
+  //                 fontSize: 18,
+  //                 fontWeight: FontWeight.w600,
+  //                 color: Colors.black,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
