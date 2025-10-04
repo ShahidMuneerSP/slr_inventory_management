@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slr_inventory_management/Screens/Dashboard/controller/dashboardController.dart';
 import 'package:slr_inventory_management/Screens/Dashboard/widgets/adCarousel.dart';
 import 'package:slr_inventory_management/Screens/Dashboard/widgets/main_drawer.dart';
+import 'package:slr_inventory_management/Screens/Purchase/view/purchase_view.dart';
 import 'package:slr_inventory_management/Screens/Sales/view/sales_view.dart';
 
 import 'package:slr_inventory_management/Utils/colors/colors.dart';
@@ -230,7 +231,7 @@ class PerfectSliverSection extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final backgroundHeight = screenWidth * 0.18;
-    final carouselContainerHeight = carouselHeight ?? screenWidth * 0.32;
+    final carouselContainerHeight = carouselHeight ?? screenWidth * 0.41;
     final carouselWidth = screenWidth * 0.9;
 
     return SliverFillRemaining(
@@ -238,18 +239,17 @@ class PerfectSliverSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: screenWidth,
-            height: 10,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: AppColors.appbarBlueGradient,
-              ),
-            ),
-          ),
-
+          // Container(
+          //   width: screenWidth,
+          //   height: 10,
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       begin: Alignment.topLeft,
+          //       end: Alignment.bottomRight,
+          //       colors: AppColors.appbarBlueGradient,
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             width: screenWidth,
             height: carouselContainerHeight,
@@ -275,7 +275,7 @@ class PerfectSliverSection extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                //SalesPerformanceCarousel(),
                 // Carousel container with proper elevation
                 Positioned.fill(
                   child: Center(
@@ -371,16 +371,17 @@ class PerfectSliverSection extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 _buildActionCard(
                                   context,
-                                  "Inventory",
-                                  Icons.inventory_rounded,
-                                  () {},
+                                  "Purchase",
+                                  Icons.receipt_long_rounded,
+                                  () {
+                                    Get.to(PurchaseView());
+                                  },
                                 ),
                                 const SizedBox(width: 12),
                                 _buildActionCard(
                                   context,
-                                  "Purchase",
-                                  Icons.receipt_long_rounded,
-
+                                  "Inventory",
+                                  Icons.inventory_rounded,
                                   () {},
                                 ),
                               ],
